@@ -4,6 +4,7 @@ import utils.confJndiEjbUrl;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
+import java.util.List;
 
 import static utils.ContextUtils.createEjbProxy;
 import static utils.ContextUtils.createRemoteEjbContext;
@@ -42,12 +43,10 @@ public class Manager {
             personService = createEjbProxy(remotingContext, jndiEjbUrl, PersonInterface.class);
             log.info(" Connexion to Remote is Done !");
 
-            personService.sayHello();
-
-
-            personService.addName("Papa Moussa");
-            personService.addName("Richard");
-            personService.addName("...");
+            personService.addName("Judin");
+            personService.addName("Meddi");
+            personService.addName("Jeyapriya");
+            personService.addName("Ibrahim");
 
         } catch (NamingException e) {
             log.error("Error resolving bean");
@@ -58,25 +57,17 @@ public class Manager {
         }
 
 
-        String name = personService.getName(0);
+        List<String> personnes = personService.getAll();
 
-        personService.removeNameFromIndex(0);
+// personnes.forEach((personne) -> System.out.println(personne));
 
-        try {
-            personService.getName(0);
-        } catch (Exception ex) {
-            log.error("Papa moussa n'existe plus !");
-        }
+        /* personnes.forEach((personne) -> {
+                   System.out.println(personne);
+    });  */
+        personnes.forEach(System.out::println);
 
-        String nameTwo = personService.getName(1);
-        personService.removeAll();
-        String say = personService.sayHello();
 
-        System.out.println("voici le nom d'indice 0: \t " + name);
-        System.out.println("voici le nom d'indice 1: \t " + nameTwo);
-        System.out.println(say);
-
-        log.info("Youpiiii !!");
+        log.info("Client B");
     }
 
 }
