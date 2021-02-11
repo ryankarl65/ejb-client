@@ -144,10 +144,27 @@
     				<artifactId>exec-maven-plugin</artifactId>
     				<version>${version.exec.plugin}</version>
     				<configuration>
-    					<mainClass>manager</mainClass>
+    					<mainClass>Manager</mainClass>
     				</configuration>
     			</plugin>
+
+    		<plugin>
+                 <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                          <manifest>
+                             <mainClass>Manager</mainClass>
+                          </manifest>
+                        </archive>
+                        <descriptorRefs>
+                           <descriptorRef>jar-with-dependencies</descriptorRef>
+                         </descriptorRefs>
+                    </configuration>
+            </plugin>
+
     		</plugins>
+
+
     	</build>
 
 </project>
